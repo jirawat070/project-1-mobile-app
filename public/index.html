@@ -266,9 +266,25 @@
   }
 
   function search(search){
-    
+
 
   }
+
+const data =  [];
+
+function totalProduct () {
+  db.collection("PRODUCTS").get()
+    .then(function(querySnapshot){
+
+        querySnapshot.docs.forEach(function(item){
+          data.push(item)
+          console.log(data)
+
+        });
+
+    } 
+  )
+}
 
 </script>
 
