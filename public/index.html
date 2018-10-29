@@ -267,17 +267,22 @@
   }
 
   function search(search){
+      const filterItems = (needle, heystack) => {
+          let query = needle.toLowerCase();
+          return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
 
+      }
+      cosole.log(filterItems(search,data));
 
   }
 
-const data =  [];
+const data =  []
 
 function totalProduct () {
   db.collection("PRODUCTS").get()
     .then(function(querySnapshot){
 
-        querySnapshot.docs.forEach(function(item){
+        querySnapshot.docs.forEach(function (item){
           data.push(item)
           console.log(data)
 
