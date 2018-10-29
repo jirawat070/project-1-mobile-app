@@ -267,12 +267,15 @@
   }
 
   function search(search){
+    console.log(search);
+    
       const filterItems = (needle, heystack) => {
           let query = needle.toLowerCase();
           return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
 
       }
-      cosole.log(filterItems(search,data));
+      console.log(filterItems(search,data));
+      var searchItem = filterItems(search,data);
 
   }
 
