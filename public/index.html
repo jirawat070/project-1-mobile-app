@@ -295,6 +295,13 @@ function totalProduct () {
   )
 }
 
+function showSearch(){
+  var product_template = $('#product_template').html();
+  var html = ejs.render(product_template,{product:title});
+  $('product').html(html);
+
+}
+
 </script>
 
 </html>
