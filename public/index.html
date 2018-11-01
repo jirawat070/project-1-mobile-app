@@ -45,6 +45,7 @@
 
 
 <body>
+  
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -63,7 +64,7 @@
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
       </ons-tab>
-      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart" onclick="showSearch(data)">
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -162,14 +163,20 @@
 
 </body>
 <script>
+  
   getHomeData();
   totalProduct();
   
   document.addEventListener('prechange', function (event) {
     if (event.index == 0) {
-      console.log('Home clicked');
+     
+  
+        console.log('Home clicked');
       // get data for home screen  
       getHomeData();
+      
+    
+  
     } else if (event.index == 1) {
       console.log('Cart clicked');
       // get data for cart screen  
@@ -179,18 +186,18 @@
     else if (event.index == 2) {
       
       var search =localStorage.getItem('searchItem');
+      var name = localStorage.getItem('icon');
       console.log('checksearch',search);
       
-      if (search== null){
-          console.log('All Products clicked');
-          // get alll data for product screen  
-          getAllProduct();
+       if( search==null && name!=null){
+        getAllProduct(name);
+      }
+      else {
 
-      }else{}
+        showSearch(search);
+      }
       
-     
-      
-    }localStorage.clear();
+    }
   });
   function getHomeData() {
 
@@ -251,6 +258,7 @@
   }
 const allPd = []
   function getAllProduct(cateName) {
+    localStorage.clear();
     //var x = data;
     //console.log('chaeck x ',x);
     if (cateName==null){
@@ -340,6 +348,8 @@ function categoryClick(iconname){
   console.log('check iconname',iconname);
   var cateName= iconname;
   getAllProduct(cateName);
+  localStorage.setItem('icon',cateName)
+  document.getElementById('tabbar').setActiveTab(2) 
 }
 
 
