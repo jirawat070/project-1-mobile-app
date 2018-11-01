@@ -64,7 +64,7 @@
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
       </ons-tab>
-      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart" onclick="showSearch(data)">
+      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart" >
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -161,46 +161,46 @@
       </ons-page>
     </template>
 
-    <template id="tab4.html">
-      <ons-page>
-        <ons-toolbar>
-          <div class="left">
-            <ons-back-button>Page 1</ons-back-button>
+     <template id="tab4.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-back-button>Page 1</ons-back-button>
+        </div>
+        <div class="center"></div>
+      </ons-toolbar>
+      <div id="detail"></div>
+      <script id="detail_template" type="text/template"> 
+        <ons-card>
+          <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+            <% detail.forEach(function(data){  
+              var data = data.data() %>
+ <ons-carousel-item id="carousel1DeP" style="background: url('<%= data.Photo %>') no-repeat center; background-size: contain;">  
+                </ons-carousel-item>
+         <% })%>
+               </ons-carousel>
+         <% detail.forEach(function(data){   
+          var data = data.data(); %>
+          <div class="title">
+            <%= data.price%>
           </div>
-          <div class="center"></div>
-        </ons-toolbar>
-        <div id="detail"></div>
-        <script id="detail_template" type="text/template"> 
-          <ons-card>
-            <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
-              <% detail.forEach(function(data){  
-                var data = data.data() %>
-   <ons-carousel-item id="carousel1DeP" style="background: url('<%= data.Photo %>') no-repeat center; background-size: contain;">  
-                  </ons-carousel-item>
-           <% })%>
-                 </ons-carousel>
-           <% detail.forEach(function(data){   
-            var data = data.data(); %>
-            <div class="title">
-              <%= data.price%>
+          <div class="content">
+            <div>
+              <%= data.title %>
             </div>
-            <div class="content">
-              <div>
-                <%= data.title %>
-              </div>
-              <ons-list>
-                <ons-list-header>Bindings</ons-list-header>
-                <ons-list-item>Vue</ons-list-item>
-                <ons-list-item>Angular</ons-list-item>
-                <ons-list-item>React</ons-list-item>
-              </ons-list>
-            </div>
-            <ons-button onclick="addtocart('<%= data.pid %>');totalprice('<%= data.price%>')">ADD TO CART</ons-button>
-            <%})%>
-          </ons-card>
-        </Script>
-      </ons-page>
-    </template>
+            <ons-list>
+              <ons-list-header>Bindings</ons-list-header>
+              <ons-list-item>Vue</ons-list-item>
+              <ons-list-item>Angular</ons-list-item>
+              <ons-list-item>React</ons-list-item>
+            </ons-list>
+          </div>
+          <ons-button onclick="addtocart('<%= data.pid %>');totalprice('<%= data.price%>')">ADD TO CART</ons-button>
+          <%})%>
+        </ons-card>
+      </Script>
+    </ons-page>
+  </template>
     
 </body>
 <script>
@@ -229,13 +229,18 @@
       var search =localStorage.getItem('searchItem');
       var name = localStorage.getItem('icon');
       console.log('checksearch',search);
+      console.log('checkname',name);
       
-       if( search==null && name!=null){
-        getAllProduct(name);
+      if (name == null && search == null) {
+        console.log(name)
+          showSearch(data);
       }
-      else {
+      else if(search==null&& name!=null) {
 
-        showSearch(search);
+        getAllProduct(name);
+      } else if(search!=null){
+          showSearch(search);
+
       }
       localStorage.clear();
     }
@@ -360,8 +365,8 @@ const allPd = []
   localStorage.setItem('searchItem',searchItem)
 
   document.getElementById('tabbar').setActiveTab(2)  }
-const data =  []
 
+const data =  []
 function totalProduct () {
   db.collection("PRODUCTS").get()
     .then(function(querySnapshot){
@@ -377,6 +382,7 @@ function totalProduct () {
 }
 
 function showSearch(title){
+  localStorage.clear();
   var product_template = $('#product_template').html();
   var html = ejs.render(product_template,{product:title});
   console.log(html);
