@@ -101,41 +101,41 @@
         <%});%></div>
 
         </script>
-        
-        <style type="text/css">
-     
-       
-       
-          .category {
-            margin: 20px 0px;
-            padding: 0px 30px;
-          }
-          .category_wrapper {
-            width: 90%;
-            margin: auto;
-            background-color:#FFFAF0;
-            border: 3px solid;
-            
-            
-          }
-          .category_wrapper ons-icon {
-            font-size: 55px;
-            padding-top: 10px;
-            line-height: 0.75em;
-          }
-        
-         
-        
-          .category_thumbnail {
-            display: inline-block;
-            margin: 16px 0px;
-          }
-          .category_title {
-            font-size: 12px;
-            font-weight: bold;
-            padding-top: 10px;
-          }
-        </style>
+
+      <style type="text/css">
+        .category {
+          margin: 20px 0px;
+          padding: 0px 30px;
+        }
+
+        .category_wrapper {
+          width: 90%;
+          margin: auto;
+          background-color: #FFFAF0;
+          border: 3px solid;
+
+
+        }
+
+        .category_wrapper ons-icon {
+          font-size: 55px;
+          padding-top: 10px;
+          line-height: 0.75em;
+        }
+
+
+
+        .category_thumbnail {
+          display: inline-block;
+          margin: 16px 0px;
+        }
+
+        .category_title {
+          font-size: 12px;
+          font-weight: bold;
+          padding-top: 10px;
+        }
+      </style>
 
     </ons-page>
   </template>
@@ -185,19 +185,26 @@
             var products = product.data();
             %>
   <ons-col width="33%" >
-    <ons-card onclick="productDetail('<%= products.pid %>')">
+    <ons-card  onclick="productDetail('<%= products.pid %>')">
           <img class="" src="<%= products.pic_URL %>" width="99%"height="70px"><br>
-  <%= products.category %><br>
-  <%= products.title %><br>
-  ฿<%= products.price %>
+          <div class="about">
+            <%= products.title %><br>
+  ฿<%= products.price %></div>
+  
     </ons-card></ons-col>
   
   <%});%> 
    </ons-row>
    
-  
-  </Script>
+      </Script>
       </div>
+      <style type="text/css">
+     .about{
+       font-size: 10pt;
+     }
+       
+          
+      </style>
 
     </ons-page>
   </template>
@@ -245,6 +252,8 @@
 
   </template>
 
+
+
 </body>
 <script>
 
@@ -259,12 +268,12 @@
       // get data for home screen  
       getHomeData();
     }
-    
+
     else if (event.index == 1) {
       console.log('Cart click');
       showCart();
     }
-    
+
     else if (event.index == 2) {
       var search = localStorage.getItem('searchItem');
       var name = localStorage.getItem('icon');
@@ -279,15 +288,15 @@
       if (search == null && name != null) {
 
         getAllProduct(name);
-      //} else if (search != null) {
+        //} else if (search != null) {
         //showSearch(search);
       }
       localStorage.clear();
     }
   });
-  
+
   function getHomeData() {
-    
+
     var docRef = db.collection("UI").doc("home");
     docRef.get().then(function (doc) {
       if (doc.exists) {
@@ -320,8 +329,8 @@
     //   $('#icons').html(html);
     // });
   }
-  
-  
+
+
   //function getCartData() {
   // var docRef = db.collection("UI").doc("cart");
 
@@ -378,7 +387,7 @@
     }
     console.log('fillcheck', filterItems(search, data));
     var searchItem = filterItems(search.toLowerCase(), data);
-    
+
     localStorage.setItem('searchItem', searchItem)
     showSearch(searchItem);
     document.getElementById('tabbar').setActiveTab(2)
@@ -490,17 +499,7 @@
     $('#showprice').html("<p><b>&nbsp; Total Price is : </b>" + price + " ฿</p>");
 
   }
-  function removeprice(pricedel) {
-    var pricedel = parseInt(pricedel, 10)
-    console.log(pricedel);
 
-    price = price - pricedel;
-    if (price == 0) {
-      document.getElementById('showprice').innerHTML = ''
-    }
-    else { $('#showprice').html("<p><b>&nbsp; Total Price is : </b>" + price + " ฿</p>"); }
-
-  }
 </script>
 
 </html>
