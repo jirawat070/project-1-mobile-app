@@ -45,7 +45,7 @@
 
 
 <body>
-  
+    <ons-navigator swipeable id="myNavigator" page="tab3.html">
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -69,6 +69,7 @@
     </ons-tabbar>
   </ons-page>
 
+  </ons-navigator>
   <template id="tab1.html">
     <ons-page id="Tab1">
       <p style="text-align: center; margin-top: 10px;">
@@ -144,7 +145,7 @@
             var products = product.data();
             %>
   <ons-col width="33%" >
-    <ons-card onclick="productDetail('<%- products.pid %>')">
+    <ons-card onclick="detail('<%- products.pid %>')">
           <img class="" src="<%= products.pic_URL %>" width="99%"height="70px"><br>
   <%= products.category %><br>
   <%= products.title %><br>
@@ -162,6 +163,7 @@
     </template>
 
      <template id="tab4.html">
+       
     <ons-page>
       <ons-toolbar>
         <div class="left">
@@ -200,6 +202,7 @@
         </ons-card>
       </Script>
     </ons-page>
+
   </template>
     
 </body>
@@ -400,10 +403,7 @@ function categoryClick(iconname){
   document.getElementById('tabbar').setActiveTab(2) 
 }
 
-function productDetail(pid){
- 
 
-}
 
 
 </script>
