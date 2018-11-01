@@ -197,7 +197,7 @@
               <ons-list-item>React</ons-list-item>
             </ons-list>
           </div>
-          <ons-button onclick="addtocart('<%= data.pid %>');totalprice('<%= data.price%>')">ADD TO CART</ons-button>
+          <ons-button onclick="addtocart('<%= data.pid %>'); ">ADD TO CART</ons-button>
           <%})%>
         </ons-card>
       </Script>
@@ -420,7 +420,16 @@
       });
   }
 
-
+  var dataCart = [];
+  function addtocart(add2cart) {
+   // localStorage.clear('quentinTarantino');
+    //localStorage.setItem('quentinTarantino', add2cart);
+    //var retrievedData = localStorage.getItem("quentinTarantino");
+    //console.log(retrievedData);
+    dataCart.push(add2cart);
+    console.log(dataCart);
+    ons.notification.alert('add to cart complete !');
+  }
 
 </script>
 
