@@ -214,7 +214,7 @@
     <ons-page>
       <ons-toolbar>
         <div class="left">
-          <ons-back-button>Page 1</ons-back-button>
+          <ons-back-button>back</ons-back-button>
         </div>
         <div class="center"></div>
       </ons-toolbar>
@@ -230,20 +230,11 @@
                </ons-carousel>
          <% detail.forEach(function(data){   
           var data = data.data(); %>
-          <div class="title">
-            <%= data.price%>
-          </div>
-          <div class="content">
-            <div>
-              <%= data.title %>
-            </div>
-            <ons-list>
-              <ons-list-header>Bindings</ons-list-header>
-              <ons-list-item>Vue</ons-list-item>
-              <ons-list-item>Angular</ons-list-item>
-              <ons-list-item>React</ons-list-item>
-            </ons-list>
-          </div>
+          <h5> ฿<%= data.price%></h5>
+          <h5><%= data.title %></h5>
+          Description: <%= data.title %> is in category of  <%= data.category %> 
+            <br>
+            <br>
           <ons-button onclick="addtoCart('<%= data.pid %>')">ADD TO CART</ons-button>
           <%})%>
         </ons-card>
