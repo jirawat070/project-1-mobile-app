@@ -91,8 +91,8 @@
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
           </p>
-          <p style="text-align: center; margin: 10px;" id="icon1_text">
-            <%= category.name %>
+          <p style="text-align: center; margin: 10px;" id="iconName">
+             <%= category.name %>
           </p>
         </ons-col>
         <%});%>
@@ -178,7 +178,9 @@
 
     else if (event.index == 2) {
       
-      var search =localStorage.getItem('searchitem');
+      var search =localStorage.getItem('searchItem');
+      console.log('checksearch',search);
+      
       if (search== null){
           console.log('All Products clicked');
           // get alll data for product screen  
@@ -188,7 +190,7 @@
       
      
       
-    }
+    }localStorage.clear();
   });
   function getHomeData() {
 
@@ -247,23 +249,28 @@
     //   console.log(data);
     // });
   }
-
+const allPd = []
   function getAllProduct() {
-
-    var allProductRef = db.collection("PRODUCTS").where("category", "==", "Sport");
-    allProductRef.get().then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
+    //var x = data;
+    //console.log('chaeck x ',x);
+    
+    showSearch(data);
+    
+    //var allProductRef = db.collection("PRODUCTS")
+    //allProductRef.get().then(function (querySnapshot) {
+      //querySnapshot.forEach(function (doc) {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        
+        //console.log(doc.id, " => ", doc.data());
+          
+   
 
 
 
-      });
-    })
-      .catch(function (error) {
-        console.log("Error getting documents: ", error);
-      });
+      //});
+    //})
+      //.catch(function (error) {
+        //console.log("Error getting documents: ", error);
+      //});
 
 
   }
@@ -292,7 +299,7 @@
           return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
 
       }
-      console.log(filterItems(search,data));
+      console.log('fillcheck', filterItems(search,data));
       var searchItem = filterItems(search,data);
   showSearch(searchItem);
   localStorage.setItem('searchItem',searchItem)
@@ -319,7 +326,7 @@ function showSearch(title){
   var html = ejs.render(product_template,{product:title});
   console.log(html);
   
-  $('product').html(html);
+  $('#product').html(html);
 
 }
 
