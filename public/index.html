@@ -64,7 +64,7 @@
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
       </ons-tab>
-      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart" >
+      <ons-tab page="tab3.html" label="Shopping" icon="fa-shopping-cart" active-icon="fa-shopping-cart" onclick="showSearch(data)" >
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -231,11 +231,12 @@
       console.log('checksearch',search);
       console.log('checkname',name);
       
-      if (name == null && search == null) {
-        console.log(name)
-          showSearch(data);
-      }
-      else if(search==null&& name!=null) {
+      //if (name == null && search == null) {
+        //console.log(name)
+          //showSearch(data);
+      //}
+      //else 
+      if(search==null&& name!=null) {
 
         getAllProduct(name);
       } else if(search!=null){
