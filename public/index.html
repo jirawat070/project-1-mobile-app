@@ -134,7 +134,7 @@
   </template>
 
   <template id="tab3.html">
-      <ons-page>
+      <ons-page id ="tab3">
   
         <div id="product"></div>
         <script id="product_template" type="text/template"> 
@@ -145,7 +145,7 @@
   <ons-col width="33%" >
     <ons-card onclick="detail('<%- products.pid %>')">
           <img class="" src="<%= products.pic_URL %>" width="99%"height="70px"><br>
-  <%= products.Category %><br>
+  <%= products.category %><br>
   <%= products.title %><br>
   ฿<%= products.price %>
     </ons-card></ons-col>
@@ -164,6 +164,7 @@
 <script>
   getHomeData();
   totalProduct();
+  
   document.addEventListener('prechange', function (event) {
     if (event.index == 0) {
       console.log('Home clicked');
@@ -286,6 +287,7 @@
       console.log(filterItems(search,data));
       var searchItem = filterItems(search,data);
   showSearch(searchItem);
+  localStorage.setItem('searchItem',searchItem)
 
   document.getElementById('tabbar').setActiveTab(2)  }
 const data =  []
@@ -307,6 +309,8 @@ function totalProduct () {
 function showSearch(title){
   var product_template = $('#product_template').html();
   var html = ejs.render(product_template,{product:title});
+  console.log(html);
+  
   $('product').html(html);
 
 }
