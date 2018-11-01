@@ -244,8 +244,8 @@
       if (search == null && name != null) {
 
         getAllProduct(name);
-      } else if (search != null) {
-        showSearch(search);
+      //} else if (search != null) {
+        //showSearch(search);
       }
       localStorage.clear();
     }
@@ -336,17 +336,16 @@
 
   function search(search) {
     console.log(search);
-
     const filterItems = (needle, heystack) => {
       let query = needle.toLowerCase();
       return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
 
     }
     console.log('fillcheck', filterItems(search, data));
-    var searchItem = filterItems(search, data);
-    showSearch(searchItem);
+    var searchItem = filterItems(search.toLowerCase(), data);
+    
     localStorage.setItem('searchItem', searchItem)
-
+    showSearch(searchItem);
     document.getElementById('tabbar').setActiveTab(2)
   }
 
