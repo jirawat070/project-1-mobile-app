@@ -87,20 +87,55 @@
       <div id="icons"></div>
 
       <script id="icon_template" type="text/template">
-        <ons-row style="height:120px" vertical-align="center">  
-        <% categories.forEach(function(category){%>  
-        <ons-col style="background:#66ff99;" width="33%" onclick="categoryClick('<%= category.name %>')" >
-          <p style="text-align: center; margin: 10px;">
-            <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
-          </p>
-          <p style="text-align: center; margin: 10px;" id="iconName">
-             <%= category.name %>
-          </p>
+        <ons-row class="category" style="text-align:center">      
+            <% categories.forEach(function(category){%>
+        <ons-col modifier="nodivider"           id="Category_1"  class="Category_1" onclick="changeTab('<%= category.name %>')"width="33%"value="<%= category.name %>">
+            <div class="category_wrapper">
+                <figure class="category_thumbnail">
+                    <ons-icon id="icon1" icon="<%= category.icon %>"></ons-icon>
+                    <div class="category_title" id="Category_1_name"> <%= category.name %> </div>
+                </figure>
+            </div>
         </ons-col>
-        <%});%>
-        </ons-row>
-        </script>
 
+        <%});%></div>
+
+        </script>
+        
+        <style type="text/css">
+     
+       
+       
+          .category {
+            margin: 20px 0px;
+            padding: 0px 30px;
+          }
+          .category_wrapper {
+            width: 90%;
+            margin: auto;
+            background-color:#FFFAF0;
+            border: 3px solid;
+            
+            
+          }
+          .category_wrapper ons-icon {
+            font-size: 55px;
+            padding-top: 10px;
+            line-height: 0.75em;
+          }
+        
+         
+        
+          .category_thumbnail {
+            display: inline-block;
+            margin: 16px 0px;
+          }
+          .category_title {
+            font-size: 12px;
+            font-weight: bold;
+            padding-top: 10px;
+          }
+        </style>
 
     </ons-page>
   </template>
