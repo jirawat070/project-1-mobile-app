@@ -144,7 +144,7 @@
             var products = product.data();
             %>
   <ons-col width="33%" >
-    <ons-card onclick="detail('<%- products.pid %>')">
+    <ons-card onclick="productDetail('<%- products.pid %>')">
           <img class="" src="<%= products.pic_URL %>" width="99%"height="70px"><br>
   <%= products.category %><br>
   <%= products.title %><br>
@@ -161,6 +161,7 @@
       </ons-page>
     </template>
 
+    
 </body>
 <script>
   
@@ -196,7 +197,7 @@
 
         showSearch(search);
       }
-      
+      localStorage.clear();
     }
   });
   function getHomeData() {
