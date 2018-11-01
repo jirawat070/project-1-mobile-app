@@ -150,7 +150,7 @@
             var products = product.data();
             %>
   <ons-col width="33%" >
-    <ons-card onclick="productDetail('<%- products.pid %>')">
+    <ons-card onclick="productDetail('<%= products.pid %>')">
           <img class="" src="<%= products.pic_URL %>" width="99%"height="70px"><br>
   <%= products.category %><br>
   <%= products.title %><br>
@@ -229,7 +229,7 @@
     } 
       else if (event.index == 1) {
       console.log('Cart click');
-      getData2cart()
+      showCart();
     }
     
 
@@ -314,7 +314,7 @@
   //}
   const allPd = []
   function getAllProduct(cateName) {
-    localStorage.clear();
+    
     //var x = data;
     //console.log('chaeck x ',x);
     if (cateName == null) {
@@ -345,22 +345,7 @@
 
     }
   }
-  function addNewData() {
-    var data = {
-      pid: '7',
-      title: 'iPhoneXS',
-      price: 50000,
-      category: 'electronic'
-    }
-    db.collection("PRODUCTS").add(data).then(function (docRef) {
-      console.log("Document written with ID: ", docRef.id);
-    })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
-
-
-  }
+ 
 
   function search(search) {
     console.log(search);
@@ -416,7 +401,7 @@
     db.collection("PRODUCTS").where("pid", "==", pid).get()
       .then(function (querySnapshot) {
         // doc.data() is never undefined for query doc snapshots
-        console.log(querySnapshot.docs);
+        console.log('chek pdDetail', querySnapshot.docs);
         var detail_template = $('#detail_template').html();
         var html = ejs.render(detail_template, { detail: querySnapshot.docs });
         $('#detail').html(html);
@@ -428,7 +413,7 @@
 
   var dataCart = [];
   
-  function Addtocart(pid) {
+  function addtoCart(pid) {
    // localStorage.clear('quentinTarantino');
     //localStorage.setItem('quentinTarantino', add2cart);
     //var retrievedData = localStorage.getItem("quentinTarantino");
@@ -436,9 +421,66 @@
     dataCart.push(pid);
     console.log(dataCart);
     ons.notification.alert('add to cart complete !');
+    $("#Fillbadge").attr('badge', dataCart.length);
   }
 
 
+
+
+function showCart(){
+  $("#Fillbadge").attr('badge','');
+  
+  document.getElementById('pic').innerHTML=""
+  console.log(dataCart);
+  
+var num = 0;
+  dataCart.forEach(function(dataCart){
+    var apr = db.collection("PRODUCTS").where("pid","==",dataCart);
+    apr.get().then(function (querySnapshot) {
+      console.log(querySnapshot.docs)
+      var pic_template = $('#pic_template').html();
+      var  html = ejs.render(pic_template, { cart: querySnapshot.docs,num:num });
+      console.log(html);
+      $('#pic').append(html);
+        
+    })  
+  })}
+
+  function remove(i) {
+  console.log(i);
+
+  console.log(dataCart);
+  
+  var remove= dataCart.splice(i,1)
+
+   ons.notification.toast("สินค้าถูกลบเรียบร้อยเเล้ว", {
+    timeout: 2000
+  });
+  $("#Fillbadge").attr('badge', dataCart.length);
+
+  showAdd()
+
+}
+var price = 0;
+
+  function totalprice(priceadd) {
+    var priceadd = parseInt(priceadd, 10)
+    console.log(priceadd);
+
+    price = price + priceadd;
+    $('#showprice').html("<p><b>&nbsp; Total Price is : </b>" + price + " ฿</p>");
+
+  }
+  function removeprice(pricedel) {
+    var pricedel = parseInt(pricedel, 10)
+    console.log(pricedel);
+
+    price = price - pricedel;
+    if(price==0){document.getElementById('showprice').innerHTML=''
+    }
+    else{$('#showprice').html("<p><b>&nbsp; Total Price is : </b>" + price + " ฿</p>");}
+
+  }
 </script>
 
 </html>
