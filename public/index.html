@@ -89,7 +89,7 @@
       <script id="icon_template" type="text/template">
         <ons-row class="category" style="text-align:center">      
             <% categories.forEach(function(category){%>
-        <ons-col modifier="nodivider"           id="Category_1"  class="Category_1" onclick="changeTab('<%= category.name %>')"width="33%"value="<%= category.name %>">
+        <ons-col modifier="nodivider"           id="Category_1"  class="Category_1" onclick="categoryClick('<%= category.name %>')"width="33%"value="<%= category.name %>">
             <div class="category_wrapper">
                 <figure class="category_thumbnail">
                     <ons-icon id="icon1" icon="<%= category.icon %>"></ons-icon>
