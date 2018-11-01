@@ -250,29 +250,35 @@
     // });
   }
 const allPd = []
-  function getAllProduct() {
+  function getAllProduct(cateName) {
     //var x = data;
     //console.log('chaeck x ',x);
+    if (cateName==null){
+    showSearch(data);}
+    else {
     
-    showSearch(data);
+    db.collection("PRODUCTS").where("category", "==", cateName).get()
+              .then(function (querySnapshot) {
+                
+                console.log(querySnapshot.docs);
+                var product_template = $('#product_template').html();
+                var html = ejs.render(product_template, { product: querySnapshot.docs });
+                console.log(html);
+                
+                $('#product').html(html);
+              })
+              .catch(function (error) {
+                console.log("Error getting documents: ", error);
+              });
+
     
-    //var allProductRef = db.collection("PRODUCTS")
-    //allProductRef.get().then(function (querySnapshot) {
-      //querySnapshot.forEach(function (doc) {
-        // doc.data() is never undefined for query doc snapshots
-        //console.log(doc.id, " => ", doc.data());
-          
    
 
 
 
-      //});
-    //})
-      //.catch(function (error) {
-        //console.log("Error getting documents: ", error);
-      //});
+      
 
-
+    }
   }
   function addNewData() {
     var data = {
@@ -332,7 +338,8 @@ function showSearch(title){
 
 function categoryClick(iconname){
   console.log('check iconname',iconname);
-  var cateName= iconame;
+  var cateName= iconname;
+  getAllProduct(cateName);
 }
 
 
