@@ -177,9 +177,17 @@
     }
 
     else if (event.index == 2) {
-      console.log('All Products clicked');
-      // get alll data for product screen  
-      getAllProduct();
+      
+      var search =localStorage.getItem('searchitem');
+      if (search== null){
+          console.log('All Products clicked');
+          // get alll data for product screen  
+          getAllProduct();
+
+      }else{}
+      
+     
+      
     }
   });
   function getHomeData() {
